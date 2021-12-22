@@ -1,0 +1,789 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BasketbollModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AnthropologicalData">
+          <Key>
+            <PropertyRef Name="AnthropologicalDataID" />
+          </Key>
+          <Property Name="AnthropologicalDataID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Height" Type="int" />
+          <Property Name="Weight" Type="int" />
+        </EntityType>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="ClubID" />
+          </Key>
+          <Property Name="ClubID" Type="int" Nullable="false" />
+          <Property Name="ClubName" Type="varchar" MaxLength="50" />
+          <Property Name="DateOfCreation" Type="date" />
+          <Property Name="TownID" Type="int" />
+        </EntityType>
+        <EntityType Name="Competition">
+          <Key>
+            <PropertyRef Name="CompetitionID" />
+          </Key>
+          <Property Name="CompetitionID" Type="int" Nullable="false" />
+          <Property Name="TeamID" Type="int" />
+          <Property Name="ClubID" Type="int" />
+          <Property Name="Year" Type="date" />
+        </EntityType>
+        <EntityType Name="Hall">
+          <Key>
+            <PropertyRef Name="HallID" />
+          </Key>
+          <Property Name="HallID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="Capacity" Type="int" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Category" Type="varchar" MaxLength="50" />
+          <Property Name="ClubID" Type="int" />
+        </EntityType>
+        <EntityType Name="MemberHistory">
+          <Key>
+            <PropertyRef Name="MemberHistoryID" />
+          </Key>
+          <Property Name="MemberHistoryID" Type="int" Nullable="false" />
+          <Property Name="Rank" Type="varchar" MaxLength="50" />
+          <Property Name="Amplua" Type="varchar" MaxLength="50" />
+          <Property Name="GameNumber" Type="int" />
+          <Property Name="AnthropologicalDataID" Type="int" />
+          <Property Name="ParticipantID" Type="int" />
+        </EntityType>
+        <EntityType Name="Participant">
+          <Key>
+            <PropertyRef Name="ParticipantID" />
+          </Key>
+          <Property Name="ParticipantID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="DateOfBirth" Type="date" />
+          <Property Name="TeamID" Type="int" />
+        </EntityType>
+        <EntityType Name="Sponsor">
+          <Key>
+            <PropertyRef Name="SponsorID" />
+          </Key>
+          <Property Name="SponsorID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="NameOfTheOrganization" Type="varchar" MaxLength="50" />
+          <Property Name="ClubID" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Name="TeamID" Type="int" Nullable="false" />
+          <Property Name="ClubID" Type="int" />
+        </EntityType>
+        <EntityType Name="Town">
+          <Key>
+            <PropertyRef Name="TownID" />
+          </Key>
+          <Property Name="TownID" Type="int" Nullable="false" />
+          <Property Name="TownName" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Trainer">
+          <Key>
+            <PropertyRef Name="TrainerID" />
+          </Key>
+          <Property Name="TrainerID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Rank" Type="varchar" MaxLength="50" />
+          <Property Name="ClubID" Type="int" />
+        </EntityType>
+        <EntityType Name="TypesOfTransport">
+          <Key>
+            <PropertyRef Name="TypesOfTransportID" />
+          </Key>
+          <Property Name="TypesOfTransportID" Type="int" Nullable="false" />
+          <Property Name="ViewT" Type="varchar" MaxLength="50" />
+          <Property Name="Capacity" Type="int" />
+          <Property Name="ClubID" Type="int" />
+        </EntityType>
+        <Association Name="FK_Club_Town">
+          <End Role="Town" Type="Self.Town" Multiplicity="0..1" />
+          <End Role="Club" Type="Self.Club" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Town">
+              <PropertyRef Name="TownID" />
+            </Principal>
+            <Dependent Role="Club">
+              <PropertyRef Name="TownID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Competition_Club">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="Competition" Type="Self.Competition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubID" />
+            </Principal>
+            <Dependent Role="Competition">
+              <PropertyRef Name="ClubID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Competition_Team">
+          <End Role="Team" Type="Self.Team" Multiplicity="0..1" />
+          <End Role="Competition" Type="Self.Competition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="Competition">
+              <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hall_Club">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="Hall" Type="Self.Hall" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubID" />
+            </Principal>
+            <Dependent Role="Hall">
+              <PropertyRef Name="ClubID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberHistory_AnthropologicalData">
+          <End Role="AnthropologicalData" Type="Self.AnthropologicalData" Multiplicity="0..1" />
+          <End Role="MemberHistory" Type="Self.MemberHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnthropologicalData">
+              <PropertyRef Name="AnthropologicalDataID" />
+            </Principal>
+            <Dependent Role="MemberHistory">
+              <PropertyRef Name="AnthropologicalDataID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberHistory_Participant">
+          <End Role="Participant" Type="Self.Participant" Multiplicity="0..1" />
+          <End Role="MemberHistory" Type="Self.MemberHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participant">
+              <PropertyRef Name="ParticipantID" />
+            </Principal>
+            <Dependent Role="MemberHistory">
+              <PropertyRef Name="ParticipantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participant_Team">
+          <End Role="Team" Type="Self.Team" Multiplicity="0..1" />
+          <End Role="Participant" Type="Self.Participant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="Participant">
+              <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sponsor_Club">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="Sponsor" Type="Self.Sponsor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubID" />
+            </Principal>
+            <Dependent Role="Sponsor">
+              <PropertyRef Name="ClubID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Team_Club">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="Team" Type="Self.Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubID" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="ClubID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trainer_Club">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="Trainer" Type="Self.Trainer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubID" />
+            </Principal>
+            <Dependent Role="Trainer">
+              <PropertyRef Name="ClubID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TypesOfTransport_Club">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="TypesOfTransport" Type="Self.TypesOfTransport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubID" />
+            </Principal>
+            <Dependent Role="TypesOfTransport">
+              <PropertyRef Name="ClubID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BasketbollModelStoreContainer">
+          <EntitySet Name="AnthropologicalData" EntityType="Self.AnthropologicalData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Club" EntityType="Self.Club" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Competition" EntityType="Self.Competition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hall" EntityType="Self.Hall" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MemberHistory" EntityType="Self.MemberHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Participant" EntityType="Self.Participant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sponsor" EntityType="Self.Sponsor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Town" EntityType="Self.Town" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trainer" EntityType="Self.Trainer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypesOfTransport" EntityType="Self.TypesOfTransport" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Club_Town" Association="Self.FK_Club_Town">
+            <End Role="Town" EntitySet="Town" />
+            <End Role="Club" EntitySet="Club" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Competition_Club" Association="Self.FK_Competition_Club">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Competition" EntitySet="Competition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Competition_Team" Association="Self.FK_Competition_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Competition" EntitySet="Competition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hall_Club" Association="Self.FK_Hall_Club">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Hall" EntitySet="Hall" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberHistory_AnthropologicalData" Association="Self.FK_MemberHistory_AnthropologicalData">
+            <End Role="AnthropologicalData" EntitySet="AnthropologicalData" />
+            <End Role="MemberHistory" EntitySet="MemberHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberHistory_Participant" Association="Self.FK_MemberHistory_Participant">
+            <End Role="Participant" EntitySet="Participant" />
+            <End Role="MemberHistory" EntitySet="MemberHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participant_Team" Association="Self.FK_Participant_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Participant" EntitySet="Participant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sponsor_Club" Association="Self.FK_Sponsor_Club">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Sponsor" EntitySet="Sponsor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Team_Club" Association="Self.FK_Team_Club">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Team" EntitySet="Team" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trainer_Club" Association="Self.FK_Trainer_Club">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Trainer" EntitySet="Trainer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TypesOfTransport_Club" Association="Self.FK_TypesOfTransport_Club">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="TypesOfTransport" EntitySet="TypesOfTransport" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BasketbollModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AnthropologicalData">
+          <Key>
+            <PropertyRef Name="AnthropologicalDataID" />
+          </Key>
+          <Property Name="AnthropologicalDataID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Height" Type="Int32" />
+          <Property Name="Weight" Type="Int32" />
+          <NavigationProperty Name="MemberHistory" Relationship="Self.FK_MemberHistory_AnthropologicalData" FromRole="AnthropologicalData" ToRole="MemberHistory" />
+        </EntityType>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="ClubID" />
+          </Key>
+          <Property Name="ClubID" Type="Int32" Nullable="false" />
+          <Property Name="ClubName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateOfCreation" Type="DateTime" Precision="0" />
+          <Property Name="TownID" Type="Int32" />
+          <NavigationProperty Name="Town" Relationship="Self.FK_Club_Town" FromRole="Club" ToRole="Town" />
+          <NavigationProperty Name="Competition" Relationship="Self.FK_Competition_Club" FromRole="Club" ToRole="Competition" />
+          <NavigationProperty Name="Hall" Relationship="Self.FK_Hall_Club" FromRole="Club" ToRole="Hall" />
+          <NavigationProperty Name="Sponsor" Relationship="Self.FK_Sponsor_Club" FromRole="Club" ToRole="Sponsor" />
+          <NavigationProperty Name="Team" Relationship="Self.FK_Team_Club" FromRole="Club" ToRole="Team" />
+          <NavigationProperty Name="Trainer" Relationship="Self.FK_Trainer_Club" FromRole="Club" ToRole="Trainer" />
+          <NavigationProperty Name="TypesOfTransport" Relationship="Self.FK_TypesOfTransport_Club" FromRole="Club" ToRole="TypesOfTransport" />
+        </EntityType>
+        <EntityType Name="Competition">
+          <Key>
+            <PropertyRef Name="CompetitionID" />
+          </Key>
+          <Property Name="CompetitionID" Type="Int32" Nullable="false" />
+          <Property Name="TeamID" Type="Int32" />
+          <Property Name="ClubID" Type="Int32" />
+          <Property Name="Year" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Club" Relationship="Self.FK_Competition_Club" FromRole="Competition" ToRole="Club" />
+          <NavigationProperty Name="Team" Relationship="Self.FK_Competition_Team" FromRole="Competition" ToRole="Team" />
+        </EntityType>
+        <EntityType Name="Hall">
+          <Key>
+            <PropertyRef Name="HallID" />
+          </Key>
+          <Property Name="HallID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Capacity" Type="Int32" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClubID" Type="Int32" />
+          <NavigationProperty Name="Club" Relationship="Self.FK_Hall_Club" FromRole="Hall" ToRole="Club" />
+        </EntityType>
+        <EntityType Name="MemberHistory">
+          <Key>
+            <PropertyRef Name="MemberHistoryID" />
+          </Key>
+          <Property Name="MemberHistoryID" Type="Int32" Nullable="false" />
+          <Property Name="Rank" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Amplua" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GameNumber" Type="Int32" />
+          <Property Name="AnthropologicalDataID" Type="Int32" />
+          <Property Name="ParticipantID" Type="Int32" />
+          <NavigationProperty Name="AnthropologicalData" Relationship="Self.FK_MemberHistory_AnthropologicalData" FromRole="MemberHistory" ToRole="AnthropologicalData" />
+          <NavigationProperty Name="Participant" Relationship="Self.FK_MemberHistory_Participant" FromRole="MemberHistory" ToRole="Participant" />
+        </EntityType>
+        <EntityType Name="Participant">
+          <Key>
+            <PropertyRef Name="ParticipantID" />
+          </Key>
+          <Property Name="ParticipantID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="TeamID" Type="Int32" />
+          <NavigationProperty Name="MemberHistory" Relationship="Self.FK_MemberHistory_Participant" FromRole="Participant" ToRole="MemberHistory" />
+          <NavigationProperty Name="Team" Relationship="Self.FK_Participant_Team" FromRole="Participant" ToRole="Team" />
+        </EntityType>
+        <EntityType Name="Sponsor">
+          <Key>
+            <PropertyRef Name="SponsorID" />
+          </Key>
+          <Property Name="SponsorID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NameOfTheOrganization" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClubID" Type="Int32" />
+          <NavigationProperty Name="Club" Relationship="Self.FK_Sponsor_Club" FromRole="Sponsor" ToRole="Club" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Name="TeamID" Type="Int32" Nullable="false" />
+          <Property Name="ClubID" Type="Int32" />
+          <NavigationProperty Name="Club" Relationship="Self.FK_Team_Club" FromRole="Team" ToRole="Club" />
+          <NavigationProperty Name="Competition" Relationship="Self.FK_Competition_Team" FromRole="Team" ToRole="Competition" />
+          <NavigationProperty Name="Participant" Relationship="Self.FK_Participant_Team" FromRole="Team" ToRole="Participant" />
+        </EntityType>
+        <EntityType Name="Town">
+          <Key>
+            <PropertyRef Name="TownID" />
+          </Key>
+          <Property Name="TownID" Type="Int32" Nullable="false" />
+          <Property Name="TownName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Club" Relationship="Self.FK_Club_Town" FromRole="Town" ToRole="Club" />
+        </EntityType>
+        <EntityType Name="Trainer">
+          <Key>
+            <PropertyRef Name="TrainerID" />
+          </Key>
+          <Property Name="TrainerID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Rank" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClubID" Type="Int32" />
+          <NavigationProperty Name="Club" Relationship="Self.FK_Trainer_Club" FromRole="Trainer" ToRole="Club" />
+        </EntityType>
+        <EntityType Name="TypesOfTransport">
+          <Key>
+            <PropertyRef Name="TypesOfTransportID" />
+          </Key>
+          <Property Name="TypesOfTransportID" Type="Int32" Nullable="false" />
+          <Property Name="ViewT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Capacity" Type="Int32" />
+          <Property Name="ClubID" Type="Int32" />
+          <NavigationProperty Name="Club" Relationship="Self.FK_TypesOfTransport_Club" FromRole="TypesOfTransport" ToRole="Club" />
+        </EntityType>
+        <Association Name="FK_MemberHistory_AnthropologicalData">
+          <End Role="AnthropologicalData" Type="Self.AnthropologicalData" Multiplicity="0..1" />
+          <End Role="MemberHistory" Type="Self.MemberHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnthropologicalData">
+              <PropertyRef Name="AnthropologicalDataID" />
+            </Principal>
+            <Dependent Role="MemberHistory">
+              <PropertyRef Name="AnthropologicalDataID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Club_Town">
+          <End Role="Town" Type="Self.Town" Multiplicity="0..1" />
+          <End Role="Club" Type="Self.Club" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Town">
+              <PropertyRef Name="TownID" />
+            </Principal>
+            <Dependent Role="Club">
+              <PropertyRef Name="TownID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Competition_Club">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="Competition" Type="Self.Competition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubID" />
+            </Principal>
+            <Dependent Role="Competition">
+              <PropertyRef Name="ClubID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hall_Club">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="Hall" Type="Self.Hall" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubID" />
+            </Principal>
+            <Dependent Role="Hall">
+              <PropertyRef Name="ClubID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sponsor_Club">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="Sponsor" Type="Self.Sponsor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubID" />
+            </Principal>
+            <Dependent Role="Sponsor">
+              <PropertyRef Name="ClubID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Team_Club">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="Team" Type="Self.Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubID" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="ClubID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trainer_Club">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="Trainer" Type="Self.Trainer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubID" />
+            </Principal>
+            <Dependent Role="Trainer">
+              <PropertyRef Name="ClubID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TypesOfTransport_Club">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="TypesOfTransport" Type="Self.TypesOfTransport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubID" />
+            </Principal>
+            <Dependent Role="TypesOfTransport">
+              <PropertyRef Name="ClubID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Competition_Team">
+          <End Role="Team" Type="Self.Team" Multiplicity="0..1" />
+          <End Role="Competition" Type="Self.Competition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="Competition">
+              <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberHistory_Participant">
+          <End Role="Participant" Type="Self.Participant" Multiplicity="0..1" />
+          <End Role="MemberHistory" Type="Self.MemberHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participant">
+              <PropertyRef Name="ParticipantID" />
+            </Principal>
+            <Dependent Role="MemberHistory">
+              <PropertyRef Name="ParticipantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participant_Team">
+          <End Role="Team" Type="Self.Team" Multiplicity="0..1" />
+          <End Role="Participant" Type="Self.Participant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="Participant">
+              <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BasketbollEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AnthropologicalData" EntityType="Self.AnthropologicalData" />
+          <EntitySet Name="Club" EntityType="Self.Club" />
+          <EntitySet Name="Competition" EntityType="Self.Competition" />
+          <EntitySet Name="Hall" EntityType="Self.Hall" />
+          <EntitySet Name="MemberHistory" EntityType="Self.MemberHistory" />
+          <EntitySet Name="Participant" EntityType="Self.Participant" />
+          <EntitySet Name="Sponsor" EntityType="Self.Sponsor" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Team" EntityType="Self.Team" />
+          <EntitySet Name="Town" EntityType="Self.Town" />
+          <EntitySet Name="Trainer" EntityType="Self.Trainer" />
+          <EntitySet Name="TypesOfTransport" EntityType="Self.TypesOfTransport" />
+          <AssociationSet Name="FK_MemberHistory_AnthropologicalData" Association="Self.FK_MemberHistory_AnthropologicalData">
+            <End Role="AnthropologicalData" EntitySet="AnthropologicalData" />
+            <End Role="MemberHistory" EntitySet="MemberHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Club_Town" Association="Self.FK_Club_Town">
+            <End Role="Town" EntitySet="Town" />
+            <End Role="Club" EntitySet="Club" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Competition_Club" Association="Self.FK_Competition_Club">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Competition" EntitySet="Competition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hall_Club" Association="Self.FK_Hall_Club">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Hall" EntitySet="Hall" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sponsor_Club" Association="Self.FK_Sponsor_Club">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Sponsor" EntitySet="Sponsor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Team_Club" Association="Self.FK_Team_Club">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Team" EntitySet="Team" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trainer_Club" Association="Self.FK_Trainer_Club">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Trainer" EntitySet="Trainer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TypesOfTransport_Club" Association="Self.FK_TypesOfTransport_Club">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="TypesOfTransport" EntitySet="TypesOfTransport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Competition_Team" Association="Self.FK_Competition_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Competition" EntitySet="Competition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberHistory_Participant" Association="Self.FK_MemberHistory_Participant">
+            <End Role="Participant" EntitySet="Participant" />
+            <End Role="MemberHistory" EntitySet="MemberHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participant_Team" Association="Self.FK_Participant_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Participant" EntitySet="Participant" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BasketbollModelStoreContainer" CdmEntityContainer="BasketbollEntities">
+          <EntitySetMapping Name="AnthropologicalData">
+            <EntityTypeMapping TypeName="BasketbollModel.AnthropologicalData">
+              <MappingFragment StoreEntitySet="AnthropologicalData">
+                <ScalarProperty Name="AnthropologicalDataID" ColumnName="AnthropologicalDataID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Club">
+            <EntityTypeMapping TypeName="BasketbollModel.Club">
+              <MappingFragment StoreEntitySet="Club">
+                <ScalarProperty Name="ClubID" ColumnName="ClubID" />
+                <ScalarProperty Name="ClubName" ColumnName="ClubName" />
+                <ScalarProperty Name="DateOfCreation" ColumnName="DateOfCreation" />
+                <ScalarProperty Name="TownID" ColumnName="TownID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Competition">
+            <EntityTypeMapping TypeName="BasketbollModel.Competition">
+              <MappingFragment StoreEntitySet="Competition">
+                <ScalarProperty Name="CompetitionID" ColumnName="CompetitionID" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="ClubID" ColumnName="ClubID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hall">
+            <EntityTypeMapping TypeName="BasketbollModel.Hall">
+              <MappingFragment StoreEntitySet="Hall">
+                <ScalarProperty Name="HallID" ColumnName="HallID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="ClubID" ColumnName="ClubID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberHistory">
+            <EntityTypeMapping TypeName="BasketbollModel.MemberHistory">
+              <MappingFragment StoreEntitySet="MemberHistory">
+                <ScalarProperty Name="MemberHistoryID" ColumnName="MemberHistoryID" />
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+                <ScalarProperty Name="Amplua" ColumnName="Amplua" />
+                <ScalarProperty Name="GameNumber" ColumnName="GameNumber" />
+                <ScalarProperty Name="AnthropologicalDataID" ColumnName="AnthropologicalDataID" />
+                <ScalarProperty Name="ParticipantID" ColumnName="ParticipantID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Participant">
+            <EntityTypeMapping TypeName="BasketbollModel.Participant">
+              <MappingFragment StoreEntitySet="Participant">
+                <ScalarProperty Name="ParticipantID" ColumnName="ParticipantID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sponsor">
+            <EntityTypeMapping TypeName="BasketbollModel.Sponsor">
+              <MappingFragment StoreEntitySet="Sponsor">
+                <ScalarProperty Name="SponsorID" ColumnName="SponsorID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NameOfTheOrganization" ColumnName="NameOfTheOrganization" />
+                <ScalarProperty Name="ClubID" ColumnName="ClubID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BasketbollModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Team">
+            <EntityTypeMapping TypeName="BasketbollModel.Team">
+              <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="ClubID" ColumnName="ClubID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Town">
+            <EntityTypeMapping TypeName="BasketbollModel.Town">
+              <MappingFragment StoreEntitySet="Town">
+                <ScalarProperty Name="TownID" ColumnName="TownID" />
+                <ScalarProperty Name="TownName" ColumnName="TownName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trainer">
+            <EntityTypeMapping TypeName="BasketbollModel.Trainer">
+              <MappingFragment StoreEntitySet="Trainer">
+                <ScalarProperty Name="TrainerID" ColumnName="TrainerID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+                <ScalarProperty Name="ClubID" ColumnName="ClubID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypesOfTransport">
+            <EntityTypeMapping TypeName="BasketbollModel.TypesOfTransport">
+              <MappingFragment StoreEntitySet="TypesOfTransport">
+                <ScalarProperty Name="TypesOfTransportID" ColumnName="TypesOfTransportID" />
+                <ScalarProperty Name="ViewT" ColumnName="ViewT" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="ClubID" ColumnName="ClubID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

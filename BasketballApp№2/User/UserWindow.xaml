@@ -5,8 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BasketballApp_2.User"
         mc:Ignorable="d"
+        WindowState="Maximized"
         Title="UserWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Blue" Offset="0"/>
+                <GradientStop Color="#FFF9F9F9" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <StackPanel.Background>
+                <ImageBrush ImageSource="/Images/user_back.jpg" Stretch="Uniform"/>
+            </StackPanel.Background>
+            <Frame Width="1000" Height="650" Margin="10" ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="clubs" NavigationUIVisibility="Hidden" />
+        </StackPanel>
     </Grid>
 </Window>

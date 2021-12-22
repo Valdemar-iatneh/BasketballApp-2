@@ -70,6 +70,60 @@
     <Compile Include="Admin\AdminWindow.xaml.cs">
       <DependentUpon>AdminWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\AnthropologicalData.cs">
+      <DependentUpon>BasketballBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BasketballBD.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BasketballBD.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BasketballBD.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BasketballBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BasketballBD.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BasketballBD.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Club.cs">
+      <DependentUpon>BasketballBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Competition.cs">
+      <DependentUpon>BasketballBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Hall.cs">
+      <DependentUpon>BasketballBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MemberHistory.cs">
+      <DependentUpon>BasketballBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Participant.cs">
+      <DependentUpon>BasketballBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sponsor.cs">
+      <DependentUpon>BasketballBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Team.cs">
+      <DependentUpon>BasketballBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Town.cs">
+      <DependentUpon>BasketballBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Trainer.cs">
+      <DependentUpon>BasketballBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TypesOfTransport.cs">
+      <DependentUpon>BasketballBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User\competition_document_page.xaml.cs">
+      <DependentUpon>competition_document_page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User\main_page.xaml.cs">
+      <DependentUpon>main_page.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User\UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
@@ -91,6 +145,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Common\page_authorization.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User\competition_document_page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User\main_page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -122,7 +184,7 @@
       <DependentUpon>LoginBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\sysdiagrams.cs">
-      <DependentUpon>LoginBD.tt</DependentUpon>
+      <DependentUpon>BasketballBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -145,6 +207,13 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>LoginBD.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="Model\BasketballBD.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BasketballBD.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\BasketballBD.edmx.diagram">
+      <DependentUpon>BasketballBD.edmx</DependentUpon>
+    </None>
     <None Include="Model\LoginBD.edmx.diagram">
       <DependentUpon>LoginBD.edmx</DependentUpon>
     </None>
@@ -159,6 +228,17 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Model\BasketballBD.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BasketballBD.edmx</DependentUpon>
+      <LastGenOutput>BasketballBD.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\BasketballBD.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BasketballBD.edmx</DependentUpon>
+      <LastGenOutput>BasketballBD.cs</LastGenOutput>
+    </Content>
+    <Resource Include="Images\user_back.jpg" />
     <Content Include="Model\LoginBD.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LoginBD.edmx</DependentUpon>

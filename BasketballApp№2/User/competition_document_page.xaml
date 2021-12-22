@@ -1,0 +1,31 @@
+﻿<Page x:Class="BasketballApp_2.User.competition_document_page"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BasketballApp_2.User"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="competition_document_page">
+
+    <Grid>
+        <ListView x:Name="list_of_clubs" Margin="0 50 0 0" ItemsSource="{Binding filmSessions}" ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="3"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Image Height="400" Margin="16 0" Source="{Binding Image}"/>
+                        <TextBlock Margin="30 0" Text="{Binding Film_ID}"/>
+                        <TextBlock Margin="30 0" Text="{Binding Name}"/>
+                        <TextBlock Margin="30 0" Text="{Binding Hall_ID, StringFormat='{}Зал {0}'}"/>
+                        <TextBlock Margin="30 0" Text="{Binding DateTime}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>

@@ -10,24 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace BasketballApp_2.User
 {
     /// <summary>
-    /// Interaction logic for UserWindow.xaml
+    /// Interaction logic for competition_document_page.xaml
     /// </summary>
-    public partial class UserWindow : Window
+    public partial class competition_document_page : Page
     {
-        public UserWindow()
+        public competition_document_page()
         {
-            clubs.NavigationService.Navigate(new competition_document_page());
             InitializeComponent();
-        }
-
-        private void films_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
-        {
-
         }
     }
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9edee99146d74f85b8ed44ae1f937946" Name="Diagram1">
+        <EntityTypeShape EntityType="BasketbollModel.AnthropologicalData" Width="1.5" PointX="7.5" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BasketbollModel.Club" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BasketbollModel.Competition" Width="1.5" PointX="7.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BasketbollModel.Hall" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BasketbollModel.MemberHistory" Width="1.5" PointX="9.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BasketbollModel.Participant" Width="1.5" PointX="7.5" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BasketbollModel.Sponsor" Width="1.5" PointX="5.25" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BasketbollModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BasketbollModel.Team" Width="1.5" PointX="5.25" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BasketbollModel.Town" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BasketbollModel.Trainer" Width="1.5" PointX="5.25" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BasketbollModel.TypesOfTransport" Width="1.5" PointX="5.25" PointY="18.125" IsExpanded="true" />
+        <AssociationConnector Association="BasketbollModel.FK_MemberHistory_AnthropologicalData" ManuallyRouted="false" />
+        <AssociationConnector Association="BasketbollModel.FK_Club_Town" ManuallyRouted="false" />
+        <AssociationConnector Association="BasketbollModel.FK_Competition_Club" ManuallyRouted="false" />
+        <AssociationConnector Association="BasketbollModel.FK_Hall_Club" ManuallyRouted="false" />
+        <AssociationConnector Association="BasketbollModel.FK_Sponsor_Club" ManuallyRouted="false" />
+        <AssociationConnector Association="BasketbollModel.FK_Team_Club" ManuallyRouted="false" />
+        <AssociationConnector Association="BasketbollModel.FK_Trainer_Club" ManuallyRouted="false" />
+        <AssociationConnector Association="BasketbollModel.FK_TypesOfTransport_Club" ManuallyRouted="false" />
+        <AssociationConnector Association="BasketbollModel.FK_Competition_Team" ManuallyRouted="false" />
+        <AssociationConnector Association="BasketbollModel.FK_MemberHistory_Participant" ManuallyRouted="false" />
+        <AssociationConnector Association="BasketbollModel.FK_Participant_Team" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
