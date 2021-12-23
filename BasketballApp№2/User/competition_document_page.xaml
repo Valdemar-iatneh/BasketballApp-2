@@ -9,7 +9,7 @@
       Title="competition_document_page">
 
     <Grid>
-        <ListView x:Name="list_of_clubs" Margin="0 50 0 0" ItemsSource="{Binding filmSessions}" ScrollViewer.VerticalScrollBarVisibility="Visible">
+        <ListView x:Name="list_of_clubs" Margin="0 50 0 0" ItemsSource="{Binding clubs}" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectionChanged="list_of_clubs_SelectionChanged">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="3"/>
@@ -18,11 +18,8 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <Image Height="400" Margin="16 0" Source="{Binding Image}"/>
-                        <TextBlock Margin="30 0" Text="{Binding Film_ID}"/>
-                        <TextBlock Margin="30 0" Text="{Binding Name}"/>
-                        <TextBlock Margin="30 0" Text="{Binding Hall_ID, StringFormat='{}Зал {0}'}"/>
-                        <TextBlock Margin="30 0" Text="{Binding DateTime}"/>
+                        <!-- <Image Height="400" Margin="16 0" Source="{Binding Image}"/> -->
+                        <TextBlock  Margin="30 0" Text="{Binding ClubName}" FontFamily="Stencil" FontSize="21.333"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

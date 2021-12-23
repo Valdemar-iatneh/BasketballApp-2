@@ -23,6 +23,7 @@ namespace BasketballApp_2.Model
     
         public int TeamID { get; set; }
         public Nullable<int> ClubID { get; set; }
+        public string TeamName { get; set; }
     
         public virtual Club Club { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -70,6 +70,7 @@
     <Compile Include="Admin\AdminWindow.xaml.cs">
       <DependentUpon>AdminWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BDConnection\basketballBdConnection.cs" />
     <Compile Include="Model\AnthropologicalData.cs">
       <DependentUpon>BasketballBD.tt</DependentUpon>
     </Compile>
@@ -118,6 +119,9 @@
     <Compile Include="Model\TypesOfTransport.cs">
       <DependentUpon>BasketballBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="User\about_club_page.xaml.cs">
+      <DependentUpon>about_club_page.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User\competition_document_page.xaml.cs">
       <DependentUpon>competition_document_page.xaml</DependentUpon>
     </Compile>
@@ -145,6 +149,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Common\page_authorization.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User\about_club_page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

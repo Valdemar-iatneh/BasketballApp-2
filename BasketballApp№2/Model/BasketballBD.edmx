@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BasketbollModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BasketbollModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AnthropologicalData">
           <Key>
             <PropertyRef Name="AnthropologicalDataID" />
@@ -89,6 +89,7 @@
           </Key>
           <Property Name="TeamID" Type="int" Nullable="false" />
           <Property Name="ClubID" Type="int" />
+          <Property Name="TeamName" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Town">
           <Key>
@@ -306,8 +307,7 @@
             <End Role="TypesOfTransport" EntitySet="TypesOfTransport" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BasketbollModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -414,6 +414,7 @@
           <NavigationProperty Name="Club" Relationship="Self.FK_Team_Club" FromRole="Team" ToRole="Club" />
           <NavigationProperty Name="Competition" Relationship="Self.FK_Competition_Team" FromRole="Team" ToRole="Competition" />
           <NavigationProperty Name="Participant" Relationship="Self.FK_Participant_Team" FromRole="Team" ToRole="Participant" />
+          <Property Name="TeamName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Town">
           <Key>
@@ -729,6 +730,7 @@
           <EntitySetMapping Name="Team">
             <EntityTypeMapping TypeName="BasketbollModel.Team">
               <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
                 <ScalarProperty Name="TeamID" ColumnName="TeamID" />
                 <ScalarProperty Name="ClubID" ColumnName="ClubID" />
               </MappingFragment>

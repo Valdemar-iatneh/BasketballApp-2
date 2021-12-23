@@ -21,8 +21,8 @@ namespace BasketballApp_2.User
     {
         public UserWindow()
         {
-            clubs.NavigationService.Navigate(new competition_document_page());
             InitializeComponent();
+            clubs.NavigationService.Navigate(new competition_document_page());
         }
 
         private void films_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
